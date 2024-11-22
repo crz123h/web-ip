@@ -1,114 +1,119 @@
-async function analyzeTarget() {
-    const target = document.getElementById("targetInput").value;
-    const resultsContainer = document.getElementById("resultsContainer");
-
-    if (!target) {
-        alert("Please enter a valid target.");
-        return;
-    }
-
-    // Clear previous results
-    resultsContainer.innerHTML = "";
-
-    // جلب IP باستخدام خدمة ip-api
-    const ipResponse = await fetch(`http://ip-api.com/json/${target}`);
-    const ipData = await ipResponse.json();
-
-    if (ipData.status === "fail") {
-        resultsContainer.innerHTML = `<p>Error: ${ipData.message}</p>`;
-    } else {
-        resultsContainer.innerHTML = `
-            <h3>IP Information</h3>
-            <p><strong>IP Address:</strong> ${ipData.query}</p>
-            <p><strong>Country:</strong> ${ipData.country}</p>
-            <p><strong>Region:</strong> ${ipData.regionName}</p>
-            <p><strong>City:</strong> ${ipData.city}</p>
-            <p><strong>Location:</strong> ${ipData.lat}, ${ipData.lon}</p>
-        `;
+// Helper function: Fetch and handle JSON data
+async function fetchData(url) {
+    try {
+        const response = await fetch(url);
+        if (!response.ok) throw new Error("Network error");
+        return await response.json();
+    } catch (error) {
+        console.error("Error fetching data:", error);
+        return null;
     }
 }
 
-async function whoisLookup() {
-    const target = document.getElementById("targetInput").value;
-    const resultsContainer = document.getElementById("resultsContainer");
-
+// 1. DNS Lookup
+async function runDnsLookup() {
+    const target = document.getElementById("targetInput").value.trim();
     if (!target) {
-        alert("Please enter a valid target.");
+        alert("Please enter a target!");
         return;
     }
 
-    // Clear previous results
-    resultsContainer.innerHTML = "";
-
-    // جلب بيانات WHOIS (يمكنك استخدام خدمة خارجية مثل jsonwhois)
-    const whoisResponse = await fetch(`https://jsonwhoisapi.com/api/v1/whois?identifier=${target}&apiKey=YOUR_API_KEY`);
-    const whoisData = await whoisResponse.json();
-
-    resultsContainer.innerHTML = `
-        <h3>WHOIS Information</h3>
-        <p><strong>Domain:</strong> ${whoisData.domain_name}</p>
-        <p><strong>Registrar:</strong> ${whoisData.registrar_name}</p>
-        <p><strong>Creation Date:</strong> ${whoisData.created_date}</p>
-        <p><strong>Expiry Date:</strong> ${whoisData.expires_date}</p>
-        <p><strong>Owner Contact:</strong> ${whoisData.contact.email}</p>
-    `;
-async function ipLocation() {
-    const target = document.getElementById("targetInput").value;
     const resultsContainer = document.getElementById("resultsContainer");
+    resultsContainer.innerHTML = `<p>Fetching DNS records for: <strong>${target}</strong>...</p>`;
 
-    if (!target) {
-        alert("Please enter a valid target.");
-        return;
-    }
-
-    // Clear previous results
-    resultsContainer.innerHTML = "";
-
-    // جلب بيانات الموقع الجغرافي باستخدام خدمة ip-api
-    const locationResponse = await fetch(`http://ip-api.com/json/${target}`);
-    const locationData = await locationResponse.json();
-
-    if (locationData.status === "fail") {
-        resultsContainer.innerHTML = `<p>Error: ${locationData.message}</p>`;
+    const data = await fetchData(`https://api.allorigins.win/raw?url=https://dns.google/resolve?name=${target}`);
+    if (data && data.Status === 0) {
+        resultsContainer.innerHTML = `<h3>DNS Results:</h3>`;
+        data.Answer.forEach((record) => {
+            resultsContainer.innerHTML += `<div class="result-card">
+                <p><strong>Name:</strong> ${record.name}</p>
+                <p><strong>Type:</strong> ${record.type}</p>
+                <p><strong>Data:</strong> ${record.data}</p>
+            </div>`;
+        });
     } else {
-        resultsContainer.innerHTML = `
-            <h3>Geolocation Information</h3>
-            <p><strong>IP Address:</strong> ${locationData.query}</p>
-            <p><strong>Country:</strong> ${locationData.country}</p>
-            <p><strong>Region:</strong> ${locationData.regionName}</p>
-            <p><strong>City:</strong> ${locationData.city}</p>
-            <p><strong>Latitude:</strong> ${locationData.lat}</p>
-            <p><strong>Longitude:</strong> ${locationData.lon}</p>
-        `;
+        resultsContainer.innerHTML = `<p>No DNS records found for <strong>${target}</strong>.</p>`;
     }
 }
 
-async function dnsLookup() {
-    const target = document.getElementById("targetInput").value;
-    const resultsContainer = document.getElementById("resultsContainer");
-
+// 2. WHOIS Lookup
+async function runWhoisLookup() {
+    const target = document.getElementById("targetInput").value.trim();
     if (!target) {
-        alert("Please enter a valid target.");
+        alert("Please enter a domain!");
         return;
     }
 
-    // Clear previous results
-    resultsContainer.innerHTML = "";
+    const resultsContainer = document.getElementById("resultsContainer");
+    resultsContainer.innerHTML = `<p>Fetching WHOIS data for: <strong>${target}</strong>...</p>`;
 
-    // جلب بيانات DNS باستخدام خدمة DNSJS
-    const dnsResponse = await fetch(`https://dns.google/resolve?name=${target}`);
-    const dnsData = await dnsResponse.json();
-
-    if (dnsData.Status !== 0) {
-        resultsContainer.innerHTML = `<p>Error: Unable to fetch DNS data.</p>`;
+    const data = await fetchData(`https://api.allorigins.win/raw?url=https://whoisjs.com/api/v1?name=${target}`);
+    if (data && data.result) {
+        const result = data.result;
+        resultsContainer.innerHTML = `<h3>WHOIS Results:</h3>
+            <div class="result-card">
+                <p><strong>Registrar:</strong> ${result.registrar}</p>
+                <p><strong>Creation Date:</strong> ${result.creation_date}</p>
+                <p><strong>Expiration Date:</strong> ${result.expiration_date}</p>
+                <p><strong>Nameservers:</strong> ${result.nameservers.join(", ")}</p>
+            </div>`;
     } else {
-        resultsContainer.innerHTML = `
-            <h3>DNS Information</h3>
-            <p><strong>Domain:</strong> ${dnsData.Question[0].name}</p>
-            <h4>DNS Records:</h4>
-            <ul>
-                ${dnsData.Answer.map(record => `<li><strong>${record.type}:</strong> ${record.data}</li>`).join('')}
-            </ul>
-        `;
+        resultsContainer.innerHTML = `<p>No WHOIS data found for <strong>${target}</strong>.</p>`;
     }
+}
+
+// 3. IP Geolocation
+async function runGeoLocation() {
+    const target = document.getElementById("targetInput").value.trim();
+    if (!target) {
+        alert("Please enter an IP address!");
+        return;
+    }
+
+    const resultsContainer = document.getElementById("resultsContainer");
+    resultsContainer.innerHTML = `<p>Fetching Geolocation data for: <strong>${target}</strong>...</p>`;
+
+    const data = await fetchData(`https://ipapi.co/${target}/json/`);
+    if (data && data.ip) {
+        resultsContainer.innerHTML = `<h3>Geolocation Results:</h3>
+            <div class="result-card">
+                <p><strong>IP:</strong> ${data.ip}</p>
+                <p><strong>City:</strong> ${data.city}</p>
+                <p><strong>Region:</strong> ${data.region}</p>
+                <p><strong>Country:</strong> ${data.country_name}</p>
+                <p><strong>Latitude:</strong> ${data.latitude}</p>
+                <p><strong>Longitude:</strong> ${data.longitude}</p>
+            </div>`;
+    } else {
+        resultsContainer.innerHTML = `<p>No Geolocation data found for <strong>${target}</strong>.</p>`;
+    }
+}
+
+// 4. Port Scanner (Simulation)
+function runPortScan() {
+    const target = document.getElementById("targetInput").value.trim();
+    if (!target) {
+        alert("Please enter an IP address!");
+        return;
+    }
+
+    const resultsContainer = document.getElementById("resultsContainer");
+    resultsContainer.innerHTML = `<p>Scanning ports for: <strong>${target}</strong>...</p>`;
+
+    setTimeout(() => {
+        resultsContainer.innerHTML = `<h3>Port Scanner Results:</h3>
+            <div class="result-card">
+                <p><strong>Open Ports:</strong></p>
+                <ul>
+                    <li>Port 22: SSH</li>
+                    <li>Port 80: HTTP</li>
+                    <li>Port 443: HTTPS</li>
+                </ul>
+            </div>`;
+    }, 3000); // Simulate scanning delay
+}
+
+// General UI Enhancements
+function clearResults() {
+    document.getElementById("resultsContainer").innerHTML = "";
 }
