@@ -1,28 +1,38 @@
-/* الخطوط الأساسية */
+/* =========== إعدادات عامة =========== */
 body {
-    font-family: 'Roboto', sans-serif;
-    background-color: #101010;
-    color: #f4f4f4;
     margin: 0;
-    padding: 0;
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(120deg, #0f2027, #203a43, #2c5364);
+    color: #ffffff;
 }
 
-/* الرأس */
+h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+}
+
+p {
+    margin: 0 0 10px;
+    line-height: 1.6;
+}
+
+/* ====== تصميم الهيدر ====== */
 .header {
-    background: linear-gradient(135deg, #0a0a0a, #1c1c1c);
+    background: linear-gradient(45deg, #1e3c72, #2a5298);
+    padding: 20px;
     text-align: center;
-    padding: 20px 0;
-    color: #32cd32;
+    color: #ffffff;
 }
 
 .header h1 {
-    font-size: 2.5rem;
-    margin: 0;
+    font-size: 3rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 10px;
 }
 
 .header p {
     font-size: 1.2rem;
-    margin-top: 10px;
+    opacity: 0.9;
 }
 
 .navbar ul {
@@ -31,94 +41,237 @@ body {
     margin: 10px 0 0;
     display: flex;
     justify-content: center;
-    gap: 20px;
+}
+
+.navbar ul li {
+    margin: 0 15px;
 }
 
 .navbar ul li a {
     text-decoration: none;
-    color: #32cd32;
+    color: #ffffff;
     font-weight: bold;
-    transition: color 0.3s;
+    padding: 5px 10px;
+    transition: all 0.3s ease-in-out;
+    border-radius: 5px;
 }
 
 .navbar ul li a:hover {
-    color: #28a428;
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.1);
 }
 
-/* الأقسام */
-.section {
-    padding: 40px 20px;
-    margin: 20px 0;
+/* ====== لوحة التحكم ====== */
+.dashboard {
     text-align: center;
-    background-color: #1a1a1a;
-    border-radius: 8px;
+    padding: 50px 20px;
 }
 
-.section h2 {
-    color: #32cd32;
-    font-size: 2rem;
+.dashboard h2 {
+    font-size: 2.5rem;
+    color: #00c6ff;
+    margin-bottom: 30px;
+}
+
+.stats {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.stat {
+    background: #1e3c72;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    color: #ffffff;
+    transition: transform 0.3s ease-in-out;
+}
+
+.stat:hover {
+    transform: scale(1.1);
+}
+
+.stat h3 {
+    font-size: 1.2rem;
+    color: #ff9f43;
+}
+
+.stat p {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+/* ====== ميزات التحليل ====== */
+.features {
+    text-align: center;
+    padding: 50px 20px;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 20px;
+    margin: 20px;
+}
+
+.features h2 {
+    font-size: 2.5rem;
+    color: #00c6ff;
+    margin-bottom: 30px;
+}
+
+#targetInput {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 20px;
+    outline: none;
+    width: 80%;
+    max-width: 400px;
+    margin-bottom: 20px;
+    font-size: 1rem;
+}
+
+.button-group button {
+    background: #00c6ff;
+    color: #ffffff;
+    border: none;
+    border-radius: 20px;
+    padding: 10px 20px;
+    margin: 10px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.button-group button:hover {
+    background: #ff6f61;
+    transform: translateY(-5px);
+}
+
+.results {
+    text-align: left;
+    margin-top: 30px;
+}
+
+.result-card {
+    background: #1e3c72;
+    padding: 20px;
+    border-radius: 10px;
+    margin: 10px 0;
+    color: #ffffff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* ====== روابط سريعة ====== */
+.quick-links {
+    margin: 20px;
+    padding: 20px;
+    background: #203a43;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.quick-links h3 {
+    color: #00c6ff;
+    font-size: 1.8rem;
     margin-bottom: 20px;
 }
 
-.input-group {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin-top: 20px;
-}
-
-input[type="text"] {
-    padding: 10px;
-    width: 300px;
-    border: 2px solid #32cd32;
-    border-radius: 5px;
-    background-color: #101010;
-    color: #fff;
-    outline: none;
-}
-
-button {
-    padding: 10px 20px;
-    border: none;
-    background-color: #32cd32;
-    color: #101010;
-    font-weight: bold;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-button:hover {
-    background-color: #28a428;
-}
-
-/* النتائج */
-.results {
-    margin-top: 20px;
-    background-color: #0d260d;
-    padding: 15px;
-    border-radius: 5px;
-}
-
-/* قائمة الخدمات */
-.services-list {
+.quick-links ul {
     list-style: none;
     padding: 0;
-    margin: 20px 0;
-    text-align: left;
-    display: inline-block;
 }
 
-.services-list li {
-    font-size: 1.2rem;
-    margin-bottom: 10px;
+.quick-links ul li {
+    margin: 10px 0;
 }
 
-/* التذييل */
-.footer {
-    background-color: #0a0a0a;
+.quick-links ul li a {
+    text-decoration: none;
+    color: #ff9f43;
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+.quick-links ul li a:hover {
+    color: #ffffff;
+    text-decoration: underline;
+}
+
+/* ====== قسم المطورين ====== */
+.developers {
+    padding: 50px 20px;
     text-align: center;
-    padding: 15px;
-    color: #32cd32;
-    font-size: 0.9rem;
+    background: #2a5298;
+    color: #ffffff;
+}
+
+.developers h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+.developers p {
+    font-size: 1.2rem;
+    margin: 10px 0;
+}
+
+/* ====== تسجيل الدخول ====== */
+.login-section {
+    padding: 50px 20px;
+    text-align: center;
+    background: linear-gradient(45deg, #ff6f61, #1e3c72);
+    color: #ffffff;
+    border-radius: 20px;
+    margin: 20px;
+}
+
+.login-section h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+.login-section button {
+    background: #ffffff;
+    color: #1e3c72;
+    border: none;
+    border-radius: 20px;
+    padding: 10px 20px;
+    margin: 10px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.login-section button:hover {
+    background: #ff9f43;
+    color: #ffffff;
+    transform: translateY(-5px);
+}
+
+/* ====== تذييل الصفحة ====== */
+.footer {
+    padding: 20px;
+    text-align: center;
+    background: #1e3c72;
+    color: #ffffff;
+}
+
+.footer ul {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0 0;
+}
+
+.footer ul li {
+    display: inline;
+    margin: 0 10px;
+}
+
+.footer ul li a {
+    text-decoration: none;
+    color: #ff9f43;
+}
+
+.footer ul li a:hover {
+    color: #ffffff;
+    text-decoration: underline;
 }
