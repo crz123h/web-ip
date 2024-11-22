@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Global Cyber Intelligence | RX-TEAM</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container header-container">
+            <h1>RX-TEAM</h1>
+            <p>Global Cyber Intelligence Platform</p>
+            <nav class="navbar">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="#dashboard">Dashboard</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="#login">Login</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="dashboard" class="dashboard">
+            <h2>Cyber Dashboard</h2>
+            <div class="stats">
+                <div class="stat">
+                    <h3>Total Scans</h3>
+                    <p id="totalScans">0</p>
+                </div>
+                <div class="stat">
+                    <h3>Open Ports</h3>
+                    <p id="openPorts">0</p>
+                </div>
+                <div class="stat">
+                    <h3>Alerts</h3>
+                    <p id="alerts">0</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="features" class="features">
+            <h2>Advanced Cyber Analysis Tools</h2>
+            <input type="text" id="targetInput" placeholder="Enter Target (e.g., example.com)">
+            <div class="button-group">
+                <button onclick="analyzeTarget()">Analyze</button>
+                <button onclick="scanPort()">Port Scanner</button>
+                <button onclick="whoisLookup()">WHOIS Lookup</button>
+                <button onclick="ipLocation()">IP Geolocation</button>
+                <button onclick="dnsLookup()">DNS Lookup</button>
+            </div>
+            <div class="results" id="resultsContainer"></div>
+        </section>
+
+        <aside class="quick-links">
+            <h3>Quick Links</h3>
+            <ul>
+                <li><a href="https://shodan.io" target="_blank">Shodan</a></li>
+                <li><a href="https://censys.io" target="_blank">Censys</a></li>
+                <li><a href="https://virustotal.com" target="_blank">VirusTotal</a></li>
+            </ul>
+        </aside>
+    </main>
+
+    <section id="developers" class="developers">
+        <h2>About the Developers</h2>
+        <p><strong>CRZ101</strong> & <strong>SVR19</strong></p>
+        <p>Contact us at: <a href="mailto:cruzrt840@gmail.com">cruzrt840@gmail.com</a></p>
+    </section>
+
+    <section id="login" class="login-section">
+        <h2>Login or Register</h2>
+        <button onclick="loginWithGoogle()">Login with Google</button>
+        <button onclick="loginWithFacebook()">Login with Facebook</button>
+        <button onclick="loginWithInstagram()">Login with Instagram</button>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 RX-TEAM. All Rights Reserved.</p>
+            <ul class="footer-links">
+                <li><a href="privacy.html">Privacy Policy</a></li>
+                <li><a href="terms.html">Terms of Service</a></li>
+            </ul>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
