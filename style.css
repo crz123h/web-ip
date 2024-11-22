@@ -1,0 +1,122 @@
+/* إعدادات التنسيق العامة */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 20px 0;
+}
+
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header h1 {
+    font-size: 30px;
+}
+
+header nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+header nav ul li {
+    display: inline;
+    margin-right: 20px;
+}
+
+header nav ul li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+main {
+    padding: 20px 0;
+}
+
+/* لوحة المعلومات */
+.dashboard {
+    background-color: #fff;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.dashboard h2 {
+    font-size: 24px;
+}
+
+.stats {
+    display: flex;
+    justify-content: space-around;
+}
+
+.stat {
+    background-color: #f4f4f4;
+    padding: 20px;
+    width: 30%;
+    text-align: center;
+}
+
+.stat h3 {
+    margin: 0;
+    font-size: 18px;
+}
+
+/* قسم الأدوات */
+.features {
+    background-color: #fff;
+    padding: 20px;
+}
+
+.features h2 {
+    font-size: 24px;
+}
+
+.button-group button {
+    padding: 10px 20px;
+    margin: 10px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+.results {
+    margin-top: 20px;
+}
+
+/* روابط سريعة */
+.quick-links {
+    background-color: #fff;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+.quick-links ul {
+    list-style: none;
+    padding: 0;
+}
+
+.quick-links ul li {
+    margin-bottom: 10px;
+}
+
+/* تذييل الصفحة */
+.footer {
+    background-color: #333;
+    color: #fff;
+    padding: 20px 0;
+    text-align: center;
+}
